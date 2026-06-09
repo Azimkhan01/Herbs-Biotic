@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model categories {
+  category_id   String     @id
+  category_name String     @unique
+  products      products[]
+}
+
+model product_images {
+  id        String   @id
+  url       String
+  productId String
+  format    String?
+  height    Int?
+  publicId  String
+  size      Int?
+  width     Int?
+  products  products @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
+
+model products {
+  id                       String                @id
+  Extract_Name             String                @map("Extract Name")
+  Botanical_Name           String?               @map("Botanical Name")
+  Part_Used                String?               @map("Part Used")
+  Typical_Extraction_Ratio String?               @map("Typical Extraction Ratio")
+  Active_Compound          String?               @map("Active Compound")
+  Primary_Benefit          String?               @map("Primary Benefit")
+  Unit_in_Order            String?               @map("Unit in Order")
+  Package_Size             String?               @map("Package Size")
+  appearance               String?
+  Category                 String
+  product_images           product_images[]
+  categories               categories            @relation(fields: [Category], references: [category_id])
+  recommended_products     recommended_products?
+}
+
+model recommended_products {
+  id        String   @id
+  productId String   @unique
+  products  products @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
