@@ -12,8 +12,8 @@ interface Props {
 }
 
 function MobileSideNavbar({ isNavbar, setIsNavbar }:Props) {
-  const [openIndex, setOpenIndex] = useState(null);
-  const [categories, setCategories] = useState([]);
+  const [openIndex, setOpenIndex] = useState<0 | null>(null);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
