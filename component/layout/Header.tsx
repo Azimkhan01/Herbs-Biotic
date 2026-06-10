@@ -109,7 +109,7 @@ export default function Header() {
         }
       `}
       >
-        <nav className="flex items-center justify-between">
+        <nav className="flex items-center justify-between ">
           {/* Mobile */}
           <div className="w-2/7 md:hidden">
             <button onClick={()=>setIsNavbar(true)} title="hamburger">
@@ -118,7 +118,7 @@ export default function Header() {
           </div>
 
           {/* Desktop Links */}
-          <div className="hidden md:flex gap-6 w-2/7">
+          <div className="hidden md:flex md:gap-3 w-2/7">
             <Link
               className="animated-line tracking-wider uppercase text-sm"
               href="/product"
@@ -164,7 +164,8 @@ export default function Header() {
                 font-extrabold
                 tracking-wide
                 text-3xl
-                md:text-[36px]
+                md:text-[30px]
+                lg:text-[36px]
                 uppercase
               "
               >
@@ -180,7 +181,7 @@ export default function Header() {
               <CiSearch className="text-2xl" />
             </button>
 
-            <button className="group bg-accent uppercase flex items-center justify-center gap-3 px-4 py-2 rounded-full text-sm transition-all duration-500">
+            <button className="sm:hidden group bg-accent uppercase md:flex items-center justify-center gap-3 px-4 py-2 rounded-full text-sm transition-all duration-500">
               shop online
               <span
                 className="
