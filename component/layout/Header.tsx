@@ -163,9 +163,9 @@ export default function Header() {
                 text-teal-900
                 font-extrabold
                 tracking-wide
-                text-3xl
+                text-2xl
                 md:text-[30px]
-                lg:text-[36px]
+                
                 uppercase
               "
               >
@@ -181,7 +181,7 @@ export default function Header() {
               <CiSearch className="text-2xl" />
             </button>
 
-            <button className="sm:hidden group bg-accent uppercase md:flex items-center justify-center gap-3 px-4 py-2 rounded-full text-sm transition-all duration-500">
+            <button className="hidden group bg-accent uppercase md:flex items-center justify-center gap-3 px-4 py-2 rounded-full text-sm transition-all duration-500">
               shop online
               <span
                 className="
