@@ -5,7 +5,9 @@ export default function Home() {
     <>
     <section className="h-screen"></section>
     <Recommendation/>    
-    <section className="h-screen"></section>
+    <section className="h-screen">
+      
+    </section>
 
     </>
   );
