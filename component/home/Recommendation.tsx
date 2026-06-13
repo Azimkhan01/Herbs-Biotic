@@ -1,5 +1,5 @@
 import React from "react";
-import CurveDivider from "../common/CurveDivider";
+import CurveDivider from "../common/Wave";
 
 function Recommendation() {
   return (
