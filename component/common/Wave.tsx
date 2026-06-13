@@ -10,22 +10,17 @@ gsap.registerPlugin(ScrollTrigger);
 interface CurveDividerProps {
   color?: string;
   className?: string;
-  direction?: "up" | "down";
 }
 
 export default function CurveDivider({
   color = "#fff",
   className = "",
-  direction = "up",
 }: CurveDividerProps) {
+  const svgRef = useRef<SVGSVGElement>(null);
   const pathRef = useRef<SVGPathElement>(null);
 
   useGSAP(() => {
-    const curve = {
-      y: direction === "up" ? -150 : 150,
-    };
-
-    const targetY = direction === "up" ? 150 : -150;
+    const curve = { y: -250 };
 
     const updatePath = () => {
       pathRef.current?.setAttribute(
@@ -43,28 +38,30 @@ export default function CurveDivider({
     updatePath();
 
     gsap.to(curve, {
-      y: targetY,
+      y: 250,
       ease: "none",
       scrollTrigger: {
-        trigger: document.documentElement,
-        start: "top top",
-        end: "bottom bottom",
-        scrub: true,
+        trigger: svgRef.current,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1.5,
+        invalidateOnRefresh: true,
       },
       onUpdate: updatePath,
     });
-  }, [direction]);
+  }, []);
 
   return (
     <svg
+      ref={svgRef}
       viewBox="0 0 1440 200"
       preserveAspectRatio="none"
-      className={`w-full h-[200px] ${className}`}
+      className={`w-full h-[200px] overflow-visible ${className}`}
     >
       <path
         ref={pathRef}
         fill={color}
-        d="M0,0 Q720,-150 1440,0 L1440,200 L0,200 Z"
+        d="M0,0 Q720,-250 1440,0 L1440,200 L0,200 Z"
       />
     </svg>
   );
