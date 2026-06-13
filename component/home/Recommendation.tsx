@@ -1,14 +1,23 @@
 import React from "react";
-import Wave from "../common/Wave";
+import CurveDivider from "../common/CurveDivider";
+
 function Recommendation() {
   return (
     <div>
-      <Wave direction="up" color="#fff" />
+      <CurveDivider
+        direction="up"
+        color="#fff"
+      />
 
-      <div className="h-screen bg-white">Content</div>
-      <Wave direction="up" color="#F3F4F6" className="bg-white" />
+      <section className="h-screen bg-white">
+        Content
+      </section>
 
-      
+      <CurveDivider
+        direction="down"
+        color="#F3F4F6"
+        className="bg-white"
+      />
     </div>
   );
 }
