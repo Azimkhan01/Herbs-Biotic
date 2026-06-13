@@ -7,19 +7,25 @@ import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface CurveProps {
+interface CurveDividerProps {
   color?: string;
   className?: string;
+  direction?: "up" | "down";
 }
 
 export default function CurveDivider({
   color = "#fff",
   className = "",
-}: CurveProps) {
+  direction = "up",
+}: CurveDividerProps) {
   const pathRef = useRef<SVGPathElement>(null);
 
   useGSAP(() => {
-    const curve = { y: -150 };
+    const curve = {
+      y: direction === "up" ? -150 : 150,
+    };
+
+    const targetY = direction === "up" ? 150 : -150;
 
     const updatePath = () => {
       pathRef.current?.setAttribute(
@@ -37,7 +43,7 @@ export default function CurveDivider({
     updatePath();
 
     gsap.to(curve, {
-      y: 150,
+      y: targetY,
       ease: "none",
       scrollTrigger: {
         trigger: document.documentElement,
@@ -47,7 +53,7 @@ export default function CurveDivider({
       },
       onUpdate: updatePath,
     });
-  }, []);
+  }, [direction]);
 
   return (
     <svg
