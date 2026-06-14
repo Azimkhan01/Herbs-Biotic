@@ -1,3 +1,5 @@
+import Page2 from "@/component/home/Page2";
+import QnA from "@/component/home/QnA";
 import Recommendation from "@/component/home/Recommendation";
 
 export default function Home() {
@@ -5,9 +7,8 @@ export default function Home() {
     <>
     <section className="h-screen"></section>
     <Recommendation/>    
-    <section className="h-screen">
-      
-    </section>
+    <QnA/>
+    <Page2/>
 
     </>
   );
