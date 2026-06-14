@@ -1,0 +1,87 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { useCategory } from "@/context/CategoryToggleContext";
+import ProductCard from "../common/ProductCard";
+
+interface ProductImage {
+  id: string;
+  url: string;
+}
+
+interface Product {
+  id: string;
+  Extract_Name: string;
+  Botanical_Name?: string;
+  Primary_Benefit?: string;
+  product_images: ProductImage[];
+}
+
+interface Recommendation {
+  id: string;
+  productId: string;
+  products: Product;
+}
+
+export default function CategoryWiseRecommendation() {
+  const { activeCategory } = useCategory();
+
+  const [products, setProducts] = useState<Recommendation[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        setLoading(true);
+
+        const res = await fetch(
+          `/api/recommendation?category=${activeCategory}`
+        );
+
+        const data = await res.json();
+
+        setProducts(data);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (activeCategory) {
+      fetchProducts();
+    }
+  }, [activeCategory]);
+
+  if (loading) {
+    return (
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 ">
+        {[...Array(4)].map((_, index) => (
+          <div
+            key={index}
+            className="aspect-[3/4] animate-pulse rounded-3xl bg-gray-100"
+          />
+        ))}
+      </div>
+    );
+  }
+
+  return (
+    <div className="mt-12">
+      {products.length ? (
+        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
+          {products.map((item) => (
+            <ProductCard
+              key={item.products.id}
+              product={item.products}
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="py-20 text-center text-gray-500">
+          No recommended products found.
+        </div>
+      )}
+    </div>
+  );
+}
