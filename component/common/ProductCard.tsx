@@ -14,6 +14,7 @@ interface Product {
   Unit_in_Order?: string;
   product_images: ProductImage[];
   Active_Compound?: string;
+  Botanical_Name?:string
 }
 
 interface ProductCardProps {
@@ -113,9 +114,10 @@ export default function ProductCard({ product }: ProductCardProps) {
 
       {/* Product Name */}
       <div>
-        <h3 className="font-black text-teal-900">
+        <h3 className="font-black text-teal-900 truncate">{product.Botanical_Name}</h3>
+        <p className="font-mono text-orange-400 text-sm">
           {product.Extract_Name}
-        </h3>
+        </p>
       </div>
 
       {/* CTA */}

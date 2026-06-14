@@ -30,32 +30,54 @@ export default function CategoryWiseRecommendation() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!activeCategory) return;
+
     const fetchProducts = async () => {
+      const storageKey = `recommendations_${activeCategory}`;
+
       try {
         setLoading(true);
 
+        // Check sessionStorage first
+        const cached = sessionStorage.getItem(storageKey);
+
+        if (cached) {
+          setProducts(JSON.parse(cached));
+          return;
+        }
+
+        // Fetch from API
         const res = await fetch(
-          `/api/recommendation?category=${activeCategory}`,
+          `/api/recommendation?category=${activeCategory}`
         );
 
-        const data = await res.json();
+        if (!res.ok) {
+          throw new Error("Failed to fetch recommendations");
+        }
+
+        const data: Recommendation[] = await res.json();
 
         setProducts(data);
+
+        // Save to sessionStorage
+        sessionStorage.setItem(
+          storageKey,
+          JSON.stringify(data)
+        );
       } catch (error) {
-        console.error(error);
+        console.error("Error fetching products:", error);
+        setProducts([]);
       } finally {
         setLoading(false);
       }
     };
 
-    if (activeCategory) {
-      fetchProducts();
-    }
+    fetchProducts();
   }, [activeCategory]);
 
   if (loading) {
     return (
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 ">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
         {[...Array(4)].map((_, index) => (
           <div
             key={index}
@@ -68,10 +90,13 @@ export default function CategoryWiseRecommendation() {
 
   return (
     <div className="mt-12">
-      {products.length ? (
+      {products.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
           {products.map((item) => (
-            <ProductCard key={item.products.id} product={item.products} />
+            <ProductCard
+              key={item.products.id}
+              product={item.products}
+            />
           ))}
         </div>
       ) : (
