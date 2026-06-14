@@ -1,8 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface ProductImage {
   id: string;
@@ -20,18 +26,58 @@ interface Product {
 
 interface ProductCardProps {
   product: Product;
+  index?: number;
 }
 
-export default function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard({
+  product,
+  index = 0,
+}: ProductCardProps) {
   const [isActive, setIsActive] = useState(false);
+
+  const cardRef = useRef<HTMLElement>(null);
+
+  useGSAP(() => {
+    if (!cardRef.current) return;
+
+    gsap.set(cardRef.current, {
+      opacity: 0,
+      y: 80,
+    });
+
+    ScrollTrigger.create({
+      trigger: cardRef.current,
+      start: "top 90%",
+
+      onEnter: () => {
+        gsap.to(cardRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          delay: index * 0.08,
+          ease: "power3.out",
+        });
+      },
+
+      onLeaveBack: () => {
+        gsap.set(cardRef.current, {
+          opacity: 0,
+          y: 80,
+        });
+      },
+    });
+  }, [index]);
 
   return (
     <article
+      ref={cardRef}
       onMouseEnter={() => setIsActive(true)}
       onMouseLeave={() => setIsActive(false)}
       onTouchStart={() => setIsActive(true)}
       onTouchEnd={() => {
-        setTimeout(() => setIsActive(false), 500);
+        setTimeout(() => {
+          setIsActive(false);
+        }, 500);
       }}
       className="
         group
@@ -56,7 +102,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           overflow-hidden
           transition-all
           duration-500
-          
+
           ${
             isActive
               ? "opacity-100 translate-y-0"
@@ -73,7 +119,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               py-2
               text-sm
               whitespace-nowrap
-              transition-colors
+              transition-all
               duration-300
               hover:bg-[#E1E53F]
             "
@@ -84,6 +130,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
         {product.Active_Compound && (
           <p
+            title={product.Active_Compound}
             className="
               rounded-full
               bg-[#E7E7E9]
@@ -92,18 +139,17 @@ export default function ProductCard({ product }: ProductCardProps) {
               text-xs
               max-w-[180px]
               truncate
-              transition-colors
+              transition-all
               duration-300
               hover:bg-[#E1E53F]
             "
-            title={product.Active_Compound}
           >
             {product.Active_Compound}
           </p>
         )}
       </div>
 
-      {/* PRODUCT IMAGE */}
+      {/* IMAGE */}
       <div className="flex flex-1 items-center justify-center py-10">
         <img
           src={product.product_images?.[0]?.url}
@@ -114,11 +160,11 @@ export default function ProductCard({ product }: ProductCardProps) {
             object-contain
             transition-all
             duration-500
-            
+
             ${
               isActive
-                ? "scale-105"
-                : "scale-100"
+                ? "scale-105 rotate-1"
+                : "scale-100 rotate-0"
             }
           `}
         />
@@ -130,7 +176,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           {product.Botanical_Name}
         </h3>
 
-        <p className="text-sm text-orange-500">
+        <p className="mt-1 text-sm text-orange-500">
           {product.Extract_Name}
         </p>
       </div>
@@ -188,6 +234,25 @@ export default function ProductCard({ product }: ProductCardProps) {
           />
         </span>
       </Link>
+
+      {/* BOTTOM ACCENT */}
+      <div
+        className={`
+          mt-4
+          h-1
+          rounded-full
+          bg-[#E1E53F]
+          origin-left
+          transition-transform
+          duration-500
+
+          ${
+            isActive
+              ? "scale-x-100"
+              : "scale-x-0"
+          }
+        `}
+      />
     </article>
   );
 }
