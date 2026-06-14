@@ -35,7 +35,7 @@ export default function CategoryWiseRecommendation() {
         setLoading(true);
 
         const res = await fetch(
-          `/api/recommendation?category=${activeCategory}`
+          `/api/recommendation?category=${activeCategory}`,
         );
 
         const data = await res.json();
@@ -69,12 +69,9 @@ export default function CategoryWiseRecommendation() {
   return (
     <div className="mt-12">
       {products.length ? (
-        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
           {products.map((item) => (
-            <ProductCard
-              key={item.products.id}
-              product={item.products}
-            />
+            <ProductCard key={item.products.id} product={item.products} />
           ))}
         </div>
       ) : (

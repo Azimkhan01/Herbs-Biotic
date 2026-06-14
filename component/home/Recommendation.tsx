@@ -48,7 +48,7 @@ function Recommendation() {
 
   return (
     <div ref={sectionRef}>
-      <CurveDivider color="#fff" />
+      <CurveDivider reverse={false} color="#fff" />
 
       <section
         className={`

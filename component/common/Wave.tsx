@@ -10,17 +10,21 @@ gsap.registerPlugin(ScrollTrigger);
 interface CurveDividerProps {
   color?: string;
   className?: string;
+  reverse?: boolean;
 }
 
 export default function CurveDivider({
   color = "#fff",
   className = "",
+  reverse = false,
 }: CurveDividerProps) {
   const svgRef = useRef<SVGSVGElement>(null);
   const pathRef = useRef<SVGPathElement>(null);
 
   useGSAP(() => {
-    const curve = { y: -250 };
+    const curve = {
+      y: reverse ? 250 : -250,
+    };
 
     const updatePath = () => {
       pathRef.current?.setAttribute(
@@ -31,14 +35,14 @@ export default function CurveDivider({
         L1440,200
         L0,200
         Z
-      `
+      `,
       );
     };
 
     updatePath();
 
-    gsap.to(curve, {
-      y: 250,
+    const tween = gsap.to(curve, {
+      y: reverse ? -250 : 250,
       ease: "none",
       scrollTrigger: {
         trigger: svgRef.current,
@@ -49,7 +53,11 @@ export default function CurveDivider({
       },
       onUpdate: updatePath,
     });
-  }, []);
+
+    return () => {
+      tween.kill();
+    };
+  }, [reverse]);
 
   return (
     <svg
@@ -61,7 +69,11 @@ export default function CurveDivider({
       <path
         ref={pathRef}
         fill={color}
-        d="M0,0 Q720,-250 1440,0 L1440,200 L0,200 Z"
+        d={
+          reverse
+          ? "M0,0 Q720,250 1440,0 L1440,200 L0,200 Z"
+          : "M0,0 Q720,-250 1440,0 L1440,200 L0,200 Z"
+        }
       />
     </svg>
   );
