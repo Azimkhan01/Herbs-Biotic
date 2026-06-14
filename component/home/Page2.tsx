@@ -97,6 +97,7 @@ export default function Page2() {
         {/* IMAGE (FIXED) */}
         <div className="flex justify-center">
           <img
+          loading="lazy"
             src="/home/bowl.png"
             alt="bowl"
             className="w-full md:w-1/2 object-contain"
