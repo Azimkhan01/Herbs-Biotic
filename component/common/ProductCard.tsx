@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
@@ -14,7 +15,7 @@ interface Product {
   Unit_in_Order?: string;
   product_images: ProductImage[];
   Active_Compound?: string;
-  Botanical_Name?:string
+  Botanical_Name?: string;
 }
 
 interface ProductCardProps {
@@ -22,8 +23,16 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
+  const [isActive, setIsActive] = useState(false);
+
   return (
     <article
+      onMouseEnter={() => setIsActive(true)}
+      onMouseLeave={() => setIsActive(false)}
+      onTouchStart={() => setIsActive(true)}
+      onTouchEnd={() => {
+        setTimeout(() => setIsActive(false), 500);
+      }}
       className="
         group
         flex
@@ -34,28 +43,26 @@ export default function ProductCard({ product }: ProductCardProps) {
         transition-all
         duration-500
         hover:-translate-y-2
+        hover:shadow-xl
+        active:scale-[0.98]
       "
     >
-      {/* Badges */}
+      {/* BADGES */}
       <div
-        className="
+        className={`
           flex
           justify-center
           gap-3
           overflow-hidden
-
-          opacity-100
-          translate-y-0
-
-          lg:opacity-0
-          lg:-translate-y-3
-
-          lg:group-hover:opacity-100
-          lg:group-hover:translate-y-0
-
           transition-all
           duration-500
-        "
+          
+          ${
+            isActive
+              ? "opacity-100 translate-y-0"
+              : "lg:opacity-0 lg:-translate-y-3"
+          }
+        `}
       >
         {product.Unit_in_Order && (
           <p
@@ -96,26 +103,34 @@ export default function ProductCard({ product }: ProductCardProps) {
         )}
       </div>
 
-      {/* Product Image */}
+      {/* PRODUCT IMAGE */}
       <div className="flex flex-1 items-center justify-center py-10">
         <img
           src={product.product_images?.[0]?.url}
           alt={product.Extract_Name}
-          className="
+          className={`
             max-h-[220px]
             rounded-2xl
             object-contain
-            transition-transform
+            transition-all
             duration-500
-            group-hover:scale-105
-          "
+            
+            ${
+              isActive
+                ? "scale-105"
+                : "scale-100"
+            }
+          `}
         />
       </div>
 
-      {/* Product Name */}
+      {/* PRODUCT INFO */}
       <div>
-        <h3 className="font-black text-teal-900 truncate">{product.Botanical_Name}</h3>
-        <p className="font-mono text-orange-400 text-sm">
+        <h3 className="truncate text-lg font-black text-teal-900">
+          {product.Botanical_Name}
+        </h3>
+
+        <p className="text-sm text-orange-500">
           {product.Extract_Name}
         </p>
       </div>
@@ -123,37 +138,33 @@ export default function ProductCard({ product }: ProductCardProps) {
       {/* CTA */}
       <Link
         href={`/product/${product.id}`}
-        className="
+        className={`
           mt-6
           flex
           items-center
           justify-between
           rounded-2xl
           bg-white
-          px-2
-          py-1
-
-          opacity-100
-          translate-y-0
-
-          lg:opacity-0
-          lg:translate-y-4
-
-          lg:group-hover:opacity-100
-          lg:group-hover:translate-y-0
-
+          px-3
+          py-2
           transition-all
           duration-500
 
+          ${
+            isActive
+              ? "opacity-100 translate-y-0"
+              : "lg:opacity-0 lg:translate-y-4"
+          }
+
           hover:bg-[#E1E53F]
-        "
+        `}
       >
         <span className="font-semibold text-teal-900">
           Place your order
         </span>
 
         <span
-          className="
+          className={`
             flex
             h-10
             w-10
@@ -161,12 +172,20 @@ export default function ProductCard({ product }: ProductCardProps) {
             justify-center
             rounded-full
             bg-[#E1E53F]
-            transition-transform
+            transition-all
             duration-300
-            group-hover:translate-x-1
-          "
+
+            ${
+              isActive
+                ? "translate-x-1 rotate-0"
+                : "translate-x-0"
+            }
+          `}
         >
-          <ArrowRight size={18} className="text-teal-900" />
+          <ArrowRight
+            size={18}
+            className="text-teal-900"
+          />
         </span>
       </Link>
     </article>
