@@ -53,9 +53,9 @@ export default function ProductCard({
         gsap.to(cardRef.current, {
           opacity: 1,
           y: 0,
-          duration: 0.8,
+          duration: 1,
           delay: index * 0.08,
-          ease: "power3.out",
+          // ease: "power3.out",  
         });
       },
 
