@@ -1,4 +1,5 @@
 import CurveDivider from "@/component/common/Wave";
+import Hero from "@/component/home/Hero";
 import Page2 from "@/component/home/Page2";
 import QnA from "@/component/home/QnA";
 import QNA2 from "@/component/home/QNA2";
@@ -7,7 +8,8 @@ import Recommendation from "@/component/home/Recommendation";
 export default function Home() {
   return (
     <>
-    <section className="h-screen"></section>
+    <Hero/>
+    <section className="h-screen" />
     <Recommendation/>    
     <QnA/>
     <Page2/>
