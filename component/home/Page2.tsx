@@ -5,7 +5,8 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SmallCard from "./SmallCard";
-
+import { MoveRight } from "lucide-react";
+import "./style.css"
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Page2() {
@@ -33,7 +34,7 @@ export default function Page2() {
           strokeDashoffset: 0,
           duration: 2,
           ease: "power2.inOut",
-        }
+        },
       );
     };
 
@@ -51,7 +52,6 @@ export default function Page2() {
 
   return (
     <section className="relative my-20 overflow-hidden">
-
       {/* SVG BACKGROUND */}
       <div
         ref={wrapRef}
@@ -76,7 +76,6 @@ export default function Page2() {
 
       {/* CONTENT */}
       <div className="relative z-10 flex flex-col gap-16 text-teal-900">
-
         {/* TOP CARDS */}
         <div className="flex flex-col gap-6">
           <div className="self-start">
@@ -97,7 +96,7 @@ export default function Page2() {
         {/* IMAGE (FIXED) */}
         <div className="flex justify-center">
           <img
-          loading="lazy"
+            loading="lazy"
             src="/home/bowl.png"
             alt="bowl"
             className="w-full md:w-1/2 object-contain"
@@ -120,7 +119,23 @@ export default function Page2() {
             />
           </div>
         </div>
+      </div>
 
+      <div className="flex justify-center items-center mt-30 mb-30">
+        <button className="group relative overflow-hidden rounded-full px-10 py-4 flex items-center gap-6 bg-accent text-teal-900 font-semibold">
+          {/* expanding circle */}
+          <span className="absolute right-10 w-10 h-10 bg-white rounded-full transition-all duration-500 ease-out group-hover:w-[120%] group-hover:h-[120%] group-hover:rounded-full group-hover:right-[-10%] group-hover:top-[-10%]" />
+
+          {/* text */}
+          <p className="relative z-10 group-hover:text-black transition-colors">
+            Learn more about us
+          </p>
+
+          {/* icon circle */}
+          <span className="relative z-10 bg-white rounded-full p-2">
+            <MoveRight />
+          </span>
+        </button>
       </div>
     </section>
   );
