@@ -122,7 +122,7 @@ export default function Page2() {
       </div>
 
       <div className="flex justify-center items-center mt-30 mb-30">
-        <button className="group relative overflow-hidden rounded-full px-10 py-4 flex items-center gap-6 bg-accent text-teal-900 font-semibold">
+        <button className="group relative overflow-hidden rounded-full px-10 py-4 flex items-center gap-6 bg-[#E1E53F] text-teal-900 font-semibold">
           {/* expanding circle */}
           <span className="absolute right-10 w-10 h-10 bg-white rounded-full transition-all duration-500 ease-out group-hover:w-[120%] group-hover:h-[120%] group-hover:rounded-full group-hover:right-[-10%] group-hover:top-[-10%]" />
 
