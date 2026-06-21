@@ -9,6 +9,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import "./css/header.css";
 import MobileSideNavbar from "./header_component/MobileSideNavbar";
+import { manrope } from "@/font/font";
 gsap.registerPlugin(useGSAP);
 
 export default function Header() {
@@ -100,12 +101,13 @@ export default function Header() {
     <>
       <header
         className={`
+        ${manrope.className}}
         fixed top-0 z-50 w-full p-6 text-teal-900
         transition-all duration-300
         ${
           scrolled
-            ? "backdrop-blur-xl bg-white/70 border-b border-black/10"
-            : "bg-transparent"
+            ? "backdrop-blur-xl bg-white/70 border-b border-black/10 "
+            : "bg-transparent text-white"
         }
       `}
       >
@@ -181,7 +183,7 @@ export default function Header() {
               <CiSearch className="text-2xl" />
             </button>
 
-            <button className="hidden group bg-[#E1E53F] uppercase md:flex items-center justify-center gap-3 px-4 py-2 rounded-full text-sm transition-all duration-500">
+            <button className="hidden text-teal-900 group bg-[#E1E53F] uppercase md:flex items-center justify-center gap-3 px-4 py-2 rounded-full text-sm transition-all duration-500">
               shop online
               <span
                 className="
