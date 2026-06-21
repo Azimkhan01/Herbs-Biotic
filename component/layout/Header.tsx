@@ -12,14 +12,17 @@ import MobileSideNavbar from "./header_component/MobileSideNavbar";
 import { manrope } from "@/font/font";
 gsap.registerPlugin(useGSAP);
 
+import { usePathname } from "next/navigation";
+
 export default function Header() {
   const [scrolled, setScrolled] = useState<boolean>(false);
+  const pathname = usePathname();
 
   const leafRef = useRef(null);
   const textWrapperRef = useRef(null);
   const herbsRef = useRef(null);
   const bioticsRef = useRef(null);
-  const [isNavbar,setIsNavbar] = useState<boolean>(false);
+  const [isNavbar, setIsNavbar] = useState<boolean>(false);
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
@@ -101,20 +104,21 @@ export default function Header() {
     <>
       <header
         className={`
-        ${manrope.className}}
-        fixed top-0 z-50 w-full p-6 text-teal-900
-        transition-all duration-300
-        ${
-          scrolled
-            ? "backdrop-blur-xl bg-white/70 border-b border-black/10 "
-            : "bg-transparent text-white"
-        }
-      `}
+    ${manrope.className}
+    fixed top-0 z-50 w-full p-6 transition-all duration-300
+    ${
+      scrolled
+        ? "backdrop-blur-xl bg-white/70 border-b border-black/10 text-teal-900"
+        : pathname === "/"
+          ? "bg-transparent text-white"
+          : "bg-transparent text-teal-900"
+    }
+  `}
       >
         <nav className="flex items-center justify-between ">
           {/* Mobile */}
           <div className="w-2/7 md:hidden">
-            <button onClick={()=>setIsNavbar(true)} title="hamburger">
+            <button onClick={() => setIsNavbar(true)} title="hamburger">
               <GiHamburgerMenu className="text-2xl" />
             </button>
           </div>

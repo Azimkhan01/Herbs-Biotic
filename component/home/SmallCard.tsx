@@ -12,7 +12,7 @@ function SmallCard({ heading, description, className }: props) {
       <div className="w-full max-w-md bg-white rounded-2xl shadow-md p-6 flex flex-col gap-4">
         {/* icon + title row */}
         <div className="flex items-start gap-3">
-          <div className="bg-accent/10 text-accent rounded-full p-2 flex items-center justify-center">
+          <div className="bg-[#E1E53F]/10 text-[#E1E53F] rounded-full p-2 flex items-center justify-center">
             <Check />
           </div>
 
