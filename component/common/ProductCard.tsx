@@ -1,15 +1,9 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
-
-gsap.registerPlugin(ScrollTrigger);
-
+import { useRouter } from "next/navigation";
 interface ProductImage {
   id: string;
   url: string;
@@ -26,51 +20,14 @@ interface Product {
 
 interface ProductCardProps {
   product: Product;
-  index?: number;
 }
 
-export default function ProductCard({
-  product,
-  index = 0,
-}: ProductCardProps) {
+export default function ProductCard({ product }: ProductCardProps) {
   const [isActive, setIsActive] = useState(false);
-
-  const cardRef = useRef<HTMLElement>(null);
-
-  useGSAP(() => {
-    if (!cardRef.current) return;
-
-    gsap.set(cardRef.current, {
-      opacity: 0,
-      y: 80,
-    });
-
-    ScrollTrigger.create({
-      trigger: cardRef.current,
-      start: "top 90%",
-
-      onEnter: () => {
-        gsap.to(cardRef.current, {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          delay: index * 0.08,
-          // ease: "power3.out",  
-        });
-      },
-
-      onLeaveBack: () => {
-        gsap.set(cardRef.current, {
-          opacity: 0,
-          y: 80,
-        });
-      },
-    });
-  }, [index]);
-
+const router = useRouter();
   return (
     <article
-      ref={cardRef}
+     onClick={() => router.push(`/product/${product.id}`)}
       onMouseEnter={() => setIsActive(true)}
       onMouseLeave={() => setIsActive(false)}
       onTouchStart={() => setIsActive(true)}
@@ -102,7 +59,6 @@ export default function ProductCard({
           overflow-hidden
           transition-all
           duration-500
-
           ${
             isActive
               ? "opacity-100 translate-y-0"
@@ -160,7 +116,6 @@ export default function ProductCard({
             object-contain
             transition-all
             duration-500
-
             ${
               isActive
                 ? "scale-105 rotate-1"
@@ -170,7 +125,7 @@ export default function ProductCard({
         />
       </div>
 
-      {/* PRODUCT INFO */}
+      {/* INFO */}
       <div>
         <h3 className="truncate text-lg font-black text-teal-900">
           {product.Botanical_Name}
@@ -195,13 +150,11 @@ export default function ProductCard({
           py-2
           transition-all
           duration-500
-
           ${
             isActive
               ? "opacity-100 translate-y-0"
               : "lg:opacity-0 lg:translate-y-4"
           }
-
           hover:bg-[#E1E53F]
         `}
       >
@@ -220,10 +173,9 @@ export default function ProductCard({
             bg-[#E1E53F]
             transition-all
             duration-300
-
             ${
               isActive
-                ? "translate-x-1 rotate-0"
+                ? "translate-x-1"
                 : "translate-x-0"
             }
           `}
@@ -235,7 +187,7 @@ export default function ProductCard({
         </span>
       </Link>
 
-      {/* BOTTOM ACCENT */}
+      {/* Bottom Accent */}
       <div
         className={`
           mt-4
@@ -245,7 +197,6 @@ export default function ProductCard({
           origin-left
           transition-transform
           duration-500
-
           ${
             isActive
               ? "scale-x-100"

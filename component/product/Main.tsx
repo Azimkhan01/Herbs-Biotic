@@ -1,34 +1,32 @@
 "use client";
 
 import { manrope } from "@/font/font";
-import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useProducts } from "@/context/ProductContext";
+import { useRouter } from "next/navigation";
 import { ArrowRight } from "lucide-react";
+import { RefObject } from "react";
+import { useLenis } from "../layout/lenis";
 
-interface Category {
-  category_id: string;
-  category_name: string;
+interface MainProps {
+  productRef: RefObject<HTMLElement | null>;
 }
+export default function Main({ productRef }: MainProps) {
+  const { categories, loading, setCategory, setPage } = useProducts();
+  const lenis = useLenis();
 
-export default function Main() {
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
-  useEffect(() => {
-    const getCategories = async () => {
-      try {
-        const res = await fetch("/api/category");
-        const data = await res.json();
-        setCategories(data);
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    getCategories();
-  }, []);
+  const handleCategory = (categoryId: string) => {
+    setCategory(categoryId);
+    setPage(1);
+     console.log(productRef.current);
+    if (productRef.current) {
+      lenis?.scrollTo(productRef.current, {
+        offset: -100, // adjust for your navbar height
+        duration: 1.2,
+      });
+    }
+  };
 
   return (
     <main className={`${manrope.className} bg-white min-h-screen py-20`}>
@@ -48,10 +46,10 @@ export default function Main() {
         ) : (
           <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {categories.map((category) => (
-              <Link
+              <button
                 key={category.category_id}
-                href={`/products/${category.category_id}`}
-                className="group rounded-3xl border border-teal-900/10 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:border-[#E1E53F] hover:shadow-xl"
+                onClick={() => handleCategory(category.category_id)}
+                className="group rounded-3xl border border-teal-900/10 bg-white p-6 text-left shadow-sm transition-all duration-300 hover:-translate-y-2 hover:border-[#E1E53F] hover:shadow-xl"
               >
                 <div className="flex items-center justify-between">
                   <h2 className="text-xl font-bold text-teal-900">
@@ -66,7 +64,7 @@ export default function Main() {
                 <p className="mt-4 text-sm text-teal-900/60">
                   View all products in this category.
                 </p>
-              </Link>
+              </button>
             ))}
           </div>
         )}
