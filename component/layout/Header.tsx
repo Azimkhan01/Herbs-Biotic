@@ -12,12 +12,12 @@ import MobileSideNavbar from "./header_component/MobileSideNavbar";
 import { manrope } from "@/font/font";
 gsap.registerPlugin(useGSAP);
 
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState<boolean>(false);
   const pathname = usePathname();
-
+  const router  = useRouter();
   const leafRef = useRef(null);
   const textWrapperRef = useRef(null);
   const herbsRef = useRef(null);
@@ -187,7 +187,7 @@ export default function Header() {
               <CiSearch className="text-2xl" />
             </button>
 
-            <button className="hidden text-teal-900 group bg-[#E1E53F] uppercase md:flex items-center justify-center gap-3 px-4 py-2 rounded-full text-sm transition-all duration-500">
+            <button onClick={()=>router.push("/product")} className="hidden text-teal-900 group bg-[#E1E53F] uppercase md:flex items-center justify-center gap-3 px-4 py-2 rounded-full text-sm transition-all duration-500">
               shop online
               <span
                 className="
