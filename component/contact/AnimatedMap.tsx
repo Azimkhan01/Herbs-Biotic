@@ -48,7 +48,7 @@ export default function AnimatedMap({
   return (
     <section
       ref={sectionRef}
-      className="relative h-[220vh] bg-white"
+      className="relative h-[220vh] "
     >
       {/* Sticky Area */}
       <div className="sticky top-0 flex h-screen items-center justify-center overflow-hidden">

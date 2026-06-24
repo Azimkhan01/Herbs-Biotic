@@ -52,6 +52,7 @@ export default function Footer() {
 
   return (
     <section>
+        
       {/* ================= HERO SECTION ================= */}
 
       {/* ================= HERO SECTION ================= */}
