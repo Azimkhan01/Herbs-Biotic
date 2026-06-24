@@ -150,12 +150,13 @@ export default function Header() {
           {/* Logo Area */}
           <div className="relative flex items-center justify-center min-w-[280px] h-12">
             {/* Leaf */}
-            <div
+            <Link
+            href={"/"}
               ref={leafRef}
               className="absolute flex items-center justify-center"
             >
               <FaLeaf className="text-4xl" />
-            </div>
+            </Link>
 
             {/* Hidden text reveal area */}
             <div
@@ -163,7 +164,8 @@ export default function Header() {
               ref={textWrapperRef}
               style={{ visibility: "hidden" }}
             >
-              <div
+              <Link
+              href={"/"}
                 className="
                 flex items-center gap-4
                 text-teal-900
@@ -177,7 +179,7 @@ export default function Header() {
               >
                 <p ref={herbsRef}>Herbs</p>
                 <p ref={bioticsRef}>Biotics</p>
-              </div>
+              </Link>
             </div>
           </div>
 
