@@ -1,4 +1,5 @@
 import ProductImageGallery from "@/component/product/ProductGallery";
+import SimilarProducts from "@/component/product/SimilarProducts";
 import { archivo_black, manrope } from "@/font/font";
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
@@ -54,7 +55,26 @@ export default async function Page({ params }: PageProps) {
   if (!product) {
     notFound();
   }
+const similarProducts = await prisma.products.findMany({
+  where: {
+    id: {
+      not: product.id,
+    },
 
+    OR: [
+      {
+        Category: product.Category,
+      },
+    ],
+  },
+
+  include: {
+    product_images: true,
+    categories: true,
+  },
+
+  take: 8,
+});
   return (
     <section className="mt-20 md:mt-28 lg:mt-36">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -74,10 +94,10 @@ export default async function Page({ params }: PageProps) {
                   text-3xl
                   leading-tight
                   tracking-wide
-                  sm:text-4xl
-                  md:text-5xl
-                  lg:text-6xl
-                  xl:text-7xl
+                  sm:text-2xl
+                  md:text-3xl
+                  lg:text-4xl
+                  xl:text-5xl
                 `}
               >
                 {product.Botanical_Name}
@@ -177,6 +197,9 @@ export default async function Page({ params }: PageProps) {
           </div>
         </div>
       </div>
+      <section>
+        <SimilarProducts productId={product.id} />
+      </section>
     </section>
   );
 }
