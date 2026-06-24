@@ -1,9 +1,6 @@
 "use client";
 
-import { Category } from "@/type/type";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { IoChevronDown } from "react-icons/io5";
 import { RxCross1 } from "react-icons/rx";
 
 interface Props {
@@ -11,32 +8,7 @@ interface Props {
   setIsNavbar: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function MobileSideNavbar({ isNavbar, setIsNavbar }:Props) {
-  const [openIndex, setOpenIndex] = useState<0 | null>(null);
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const getCategories = async () => {
-      try {
-        const res = await fetch("/api/category");
-
-        if (!res.ok) {
-          throw new Error("Failed to fetch categories");
-        }
-
-        const data = await res.json();
-        setCategories(data);
-      } catch (error) {
-        console.error("Category fetch error:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    getCategories();
-  }, []);
-
+function MobileSideNavbar({ isNavbar, setIsNavbar }: Props) {
   return (
     <div
       className={`
@@ -84,58 +56,15 @@ function MobileSideNavbar({ isNavbar, setIsNavbar }:Props) {
             </Link>
           </div>
 
-          {/* Product Accordion */}
+          {/* Product */}
           <div className="border-b border-black/10 py-3">
-            <button
-              onClick={() => setOpenIndex(openIndex === 0 ? null : 0)}
-              className="w-full flex items-center justify-between text-lg font-medium uppercase"
+            <Link
+              href="/product"
+              className="block text-lg font-medium uppercase"
+              onClick={() => setIsNavbar(false)}
             >
-              <span>Product</span>
-
-              <IoChevronDown
-                className={`
-                  text-xl transition-transform duration-300
-                  ${openIndex === 0 ? "rotate-180" : ""}
-                `}
-              />
-            </button>
-
-            <div
-              className={`
-                overflow-hidden transition-all duration-300
-                ${openIndex === 0 ? "max-h-96 mt-3" : "max-h-0"}
-              `}
-            >
-              <div className="ml-4 flex flex-col gap-3">
-                {loading ? (
-                  <div className="flex flex-col gap-3">
-                    {[...Array(4)].map((_, index) => (
-                      <div
-                        key={index}
-                        className="h-4 w-full rounded bg-gray-300 animate-pulse"
-                      />
-                    ))}
-                  </div>
-                ) : (
-                  categories.map((category:Category) => (
-                    <Link
-                      key={category.category_id}
-                      href={`/product/${category.category_id}`}
-                      className="
-                        text-sm
-                        uppercase
-                        text-teal-900/80
-                        hover:text-teal-900
-                        transition-colors
-                      "
-                      onClick={() => setIsNavbar(false)}
-                    >
-                      {category.category_name}
-                    </Link>
-                  ))
-                )}
-              </div>
-            </div>
+              Product
+            </Link>
           </div>
 
           {/* Contact */}

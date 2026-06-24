@@ -16,9 +16,7 @@ export default function Home() {
     <CurveDivider color="#FFFFFF" className="bg-[#F3F4F6]" />
     <QNA2/>
     <CurveDivider color="#F3F4F6" className="bg-white" />
-    <section className="h-screen ">
-      
-    </section>
+    
     </>
   );
 }

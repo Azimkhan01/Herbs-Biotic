@@ -190,7 +190,7 @@ function QNA2() {
 
         <div className="mt-6 flex items-center justify-center gap-4 md:justify-start">
 
-          <button
+          <button title="t"
             onClick={() => setPage((p) => Math.max(p - 1, 0))}
             disabled={page === 0}
             className="flex h-12 w-12 items-center justify-center rounded-full border border-teal-900/15 transition hover:bg-[#E1E53F] disabled:opacity-30"
@@ -201,7 +201,7 @@ function QNA2() {
           <div className="flex items-center gap-2">
 
             {Array.from({ length: totalPages }).map((_, i) => (
-              <button
+              <button title="t"
                 key={i}
                 onClick={() => setPage(i)}
                 className={`transition-all duration-300 rounded-full ${
@@ -215,6 +215,7 @@ function QNA2() {
           </div>
 
           <button
+          title="t"
             onClick={() =>
               setPage((p) => Math.min(totalPages - 1, p + 1))
             }
