@@ -255,13 +255,11 @@ export default function Header() {
         {/* ---------------- Right Side ---------------- */}
 
         <div className="flex w-2/7 items-center justify-end gap-6">
-          <button
-            type="button"
-            aria-label="Search"
-            title="Search"
+          <Link
+           href="/search"
           >
             <CiSearch className="text-2xl" />
-          </button>
+          </Link>
 
           <Link
             href="/product"
