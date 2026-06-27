@@ -1,11 +1,6 @@
 "use client";
 
-import React, {
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -122,7 +117,7 @@ export default function Header() {
           stagger: 0.08,
           ease: "power4.out",
         },
-        "-=0.05"
+        "-=0.05",
       );
 
     return () => {
@@ -144,9 +139,9 @@ export default function Header() {
     }
   }, [scrolled]);
   return (
-  <>
-    <header
-      className={`
+    <>
+      <header
+        className={`
         ${manrope.className}
         fixed top-0 left-0 z-50 w-full
         transition-all duration-300
@@ -159,80 +154,81 @@ export default function Header() {
               : "bg-transparent text-teal-900"
         }
       `}
-    >
-      <nav
-        className="flex items-center justify-between"
-        aria-label="Primary Navigation"
       >
-        {/* ---------------- Mobile ---------------- */}
+        <nav
+          className="flex items-center justify-between"
+          aria-label="Primary Navigation"
+        >
+          {/* ---------------- Mobile ---------------- */}
 
-        <div className="w-2/7 md:hidden">
-          <button
-            type="button"
-            aria-label="Open Menu"
-            title="Open Menu"
-            onClick={() => setIsNavbar(true)}
-          >
-            <GiHamburgerMenu className="text-2xl" />
-          </button>
-        </div>
+          <div className="w-2/7 md:hidden">
+            <button
+              type="button"
+              aria-label="Open Menu"
+              title="Open Menu"
+              onClick={() => setIsNavbar(true)}
+            >
+              <GiHamburgerMenu className="text-2xl" />
+            </button>
+          </div>
 
-        {/* ---------------- Desktop Links ---------------- */}
+          {/* ---------------- Desktop Links ---------------- */}
 
-        <div className="hidden w-2/7 md:flex items-center gap-5">
-          <Link
-            href="/product"
-            className="animated-line text-sm uppercase tracking-wider"
-          >
-            Product
-          </Link>
+          <div className="hidden w-2/7 md:flex items-center gap-5">
+            <Link
+              href="/product"
+              className="animated-line text-sm uppercase tracking-wider"
+            >
+              Product
+            </Link>
 
-          <Link
-            href="/contact"
-            className="animated-line text-sm uppercase tracking-wider"
-          >
-            Contact
-          </Link>
+            <Link
+              href="/contact"
+              className="animated-line text-sm uppercase tracking-wider"
+            >
+              Contact
+            </Link>
 
-          <Link
-            href="/certification"
-            className="animated-line text-sm uppercase tracking-wider"
-          >
-            Certification
-          </Link>
-        </div>
+            <Link
+              href="/certification"
+              className="animated-line text-sm uppercase tracking-wider"
+            >
+              Certification
+            </Link>
+          </div>
 
-        {/* ---------------- Logo ---------------- */}
+          {/* ---------------- Logo ---------------- */}
 
-        <div className="relative flex h-12 min-w-[280px] items-center justify-center">
-          {/* Leaf Logo */}
+          <div className="relative flex h-12 min-w-[280px] items-center justify-center">
+            {/* Leaf Logo */}
 
-          <Link
-            href="/"
-            ref={leafRef}
-            aria-label="Home"
-            className="absolute flex items-center justify-center"
-          >
-            <Image
-              src="/logo/onlylogowhitebgr.png"
-              alt="Herbs Biotics"
-              width={100}
-              height={100}
-              priority
-              className="p-3 select-none"
-            />
-          </Link>
-
-          {/* Animated Text */}
-
-          <div
-            ref={textWrapperRef}
-            className="absolute overflow-hidden"
-          >
             <Link
               href="/"
+              ref={leafRef}
               aria-label="Home"
-              className="
+              className="absolute flex items-center justify-center"
+            >
+              <Image
+                src={
+                  pathname === "/"
+                    ? "/logo/onlylogowhitebgr.png"
+                    : "/logo/onlylogo.png"
+                }
+                alt="Herbs Biotics"
+                width={100}
+                height={100}
+                priority
+                className="select-none p-3"
+              />
+            </Link>
+
+            {/* Animated Text */}
+
+            <div ref={textWrapperRef} className="absolute overflow-hidden">
+              <Link
+                href="/"
+                aria-label="Home"
+                className="
                 flex
                 items-center
                 gap-4
@@ -244,26 +240,24 @@ export default function Header() {
                 text-teal-900
                 whitespace-nowrap
               "
-            >
-              <p ref={herbsRef}>Herbs</p>
+              >
+                <p ref={herbsRef}>Herbs</p>
 
-              <p ref={bioticsRef}>Biotics</p>
-            </Link>
+                <p ref={bioticsRef}>Biotics</p>
+              </Link>
+            </div>
           </div>
-        </div>
 
-        {/* ---------------- Right Side ---------------- */}
+          {/* ---------------- Right Side ---------------- */}
 
-        <div className="flex w-2/7 items-center justify-end gap-6">
-          <Link
-           href="/search"
-          >
-            <CiSearch className="text-2xl" />
-          </Link>
+          <div className="flex w-2/7 items-center justify-end gap-6">
+            <Link href="/search">
+              <CiSearch className="text-2xl" />
+            </Link>
 
-          <Link
-            href="/product"
-            className="
+            <Link
+              href="/product"
+              className="
               group
               hidden
               md:flex
@@ -279,11 +273,10 @@ export default function Header() {
               transition-all
               duration-300
             "
-          >
-            Shop Online
-
-            <span
-              className="
+            >
+              Shop Online
+              <span
+                className="
                 flex
                 w-0
                 rotate-180
@@ -297,18 +290,15 @@ export default function Header() {
                 group-hover:rotate-0
                 group-hover:opacity-100
               "
-            >
-              <CiLocationArrow1 className="text-xl" />
-            </span>
-          </Link>
-        </div>
-      </nav>
-    </header>
+              >
+                <CiLocationArrow1 className="text-xl" />
+              </span>
+            </Link>
+          </div>
+        </nav>
+      </header>
 
-    <MobileSideNavbar
-      isNavbar={isNavbar}
-      setIsNavbar={setIsNavbar}
-    />
-  </>
-);
+      <MobileSideNavbar isNavbar={isNavbar} setIsNavbar={setIsNavbar} />
+    </>
+  );
 }
