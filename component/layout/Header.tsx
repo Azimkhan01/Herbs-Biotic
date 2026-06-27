@@ -13,6 +13,7 @@ import { manrope } from "@/font/font";
 gsap.registerPlugin(useGSAP);
 
 import { usePathname, useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState<boolean>(false);
@@ -155,7 +156,8 @@ export default function Header() {
               ref={leafRef}
               className="absolute flex items-center justify-center"
             >
-              <FaLeaf className="text-4xl" />
+              {/* <FaLeaf className="text-4xl" /> */}
+              <Image src={'/logo/onlylogowhitebgr.png'} className="p-3" alt="" width={100} height={100} />
             </Link>
 
             {/* Hidden text reveal area */}

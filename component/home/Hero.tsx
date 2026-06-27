@@ -19,12 +19,22 @@ export default function Hero() {
     "https://media.istockphoto.com/id/1344923073/photo/a-lake-in-the-shape-of-human-footprints-in-the-middle-of-a-lush-forest-as-a-metaphor-for-the.jpg?b=1&s=612x612&w=0&k=20&c=OiarzFdUheqgX-6cesGyj149iBLsS80kKQtfuF8cKYs=",
     "https://images.unsplash.com/photo-1525304937537-4d586f394674?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0",
     "https://images.pexels.com/photos/37586668/pexels-photo-37586668.jpeg",
+    "https://plus.unsplash.com/premium_vector-1697729804286-7dd6c1a04597?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bmF0dXJlfGVufDB8fDB8fHww",
+    "https://media.istockphoto.com/id/1388315979/vector/fantastic-epic-magical-landscape-of-mountains-summer-and-snowy-nature-glacier-in-the.webp?a=1&b=1&s=612x612&w=0&k=20&c=-vGs9fc4BDkHchA_89udH0Js8Y4iWDu91EHiTIvc-tA=",
+     "https://plus.unsplash.com/premium_photo-1661337223133-a92f4f68d001?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjV8fGhlcmJzfGVufDB8fDB8fHww"
   ];
 
   const videos = [
     "https://www.pexels.com/download/video/36511267/",
     "https://www.pexels.com/download/video/5866128/",
     "https://www.pexels.com/download/video/36329571/",
+    "https://www.pexels.com/download/video/32003292/",
+    "https://www.pexels.com/download/video/6666676/",
+    "https://www.pexels.com/download/video/18865862/",
+    "https://www.pexels.com/download/video/35946783/",
+    "https://www.pexels.com/download/video/36465506/",
+    "https://www.pexels.com/download/video/4902155/",
+    "https://www.pexels.com/download/video/35084155/"
   ];
 
   const [mediaType, setMediaType] = useState<"image" | "video">("image");
@@ -96,6 +106,7 @@ export default function Hero() {
           >
             Herbs Biotic
           </h1>
+          <p className={`text-xl font-bold text-white ${archivo_black.className}`}>Pure Herbs Pure Happiness</p>
 
           <button
             className="mt-10 rounded-full bg-white p-4 font-black text-teal-900 flex items-center gap-4"
