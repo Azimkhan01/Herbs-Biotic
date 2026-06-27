@@ -4,12 +4,13 @@ import Page2 from "@/component/home/Page2";
 import QnA from "@/component/home/QnA";
 import QNA2 from "@/component/home/QNA2";
 import Recommendation from "@/component/home/Recommendation";
+import Search from "@/component/home/Search";
 
 export default function Home() {
   return (
     <>
     <Hero/>
-    <section className="h-screen" />
+    <Search/>
     <Recommendation/>    
     <QnA/>
     <Page2/>
