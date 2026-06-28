@@ -45,7 +45,7 @@ export default function ProductImageGallery({ images }: Props) {
       {/* Main Slider */}
       <Carousel setApi={setApi}>
         <CarouselContent>
-          {images.map((image) => (
+          {images?.map((image) => (
             <CarouselItem key={image.id}>
               <div className="relative h-[280px] sm:h-[380px] md:h-[500px] lg:h-[550px] overflow-hidden rounded-[32px] bg-[#F6F7F8]">
                 <Image
@@ -63,7 +63,7 @@ export default function ProductImageGallery({ images }: Props) {
 
       {/* Thumbnails */}
       <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
-        {images.map((image, index) => (
+        {images?.map((image, index) => (
           <button
             key={image.id}
             type="button"
@@ -102,7 +102,7 @@ export default function ProductImageGallery({ images }: Props) {
 
       {/* Dots Indicator (Mobile) */}
       <div className="flex justify-center gap-2 sm:hidden">
-        {images.map((_, index) => (
+        {images?.map((_, index) => (
           <div
             key={index}
             className={`h-2 rounded-full transition-all ${

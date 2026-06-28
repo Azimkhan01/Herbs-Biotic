@@ -52,47 +52,7 @@ interface ProductContextType {
 
 const ProductContext = createContext<ProductContextType | null>(null);
 
-const CACHE_TIME = 1000 * 60 * 30; // 30 minutes
-
-function setCache(key: string, value: unknown) {
-  if (typeof window === "undefined") return;
-
-  localStorage.setItem(
-    key,
-    JSON.stringify({
-      value,
-      expiry: Date.now() + CACHE_TIME,
-    })
-  );
-}
-
-function getCache<T>(key: string): T | null {
-  if (typeof window === "undefined") return null;
-
-  const item = localStorage.getItem(key);
-
-  if (!item) return null;
-
-  try {
-    const parsed = JSON.parse(item);
-
-    if (Date.now() > parsed.expiry) {
-      localStorage.removeItem(key);
-      return null;
-    }
-
-    return parsed.value;
-  } catch {
-    localStorage.removeItem(key);
-    return null;
-  }
-}
-
-export function ProductProvider({
-  children,
-}: {
-  children: ReactNode;
-}) {
+export function ProductProvider({ children }: { children: ReactNode }) {
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
 
@@ -101,31 +61,15 @@ export function ProductProvider({
   const [page, setPage] = useState(1);
   const [category, setCategory] = useState("");
 
-  const [pagination, setPagination] =
-    useState<Pagination | null>(null);
+  const [pagination, setPagination] = useState<Pagination | null>(null);
 
   // ---------------------------
-  // Fetch Products
+  // PRODUCTS
   // ---------------------------
-
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         setLoading(true);
-
-        const cacheKey = `products-${page}-${category || "all"}`;
-
-        const cached = getCache<{
-          products: Product[];
-          pagination: Pagination;
-        }>(cacheKey);
-
-        if (cached) {
-          setProducts(cached.products);
-          setPagination(cached.pagination);
-          setLoading(false);
-          return;
-        }
 
         let url = `/api/product?page=${page}&limit=10`;
 
@@ -134,22 +78,13 @@ export function ProductProvider({
         }
 
         const res = await fetch(url);
-
-        if (!res.ok) {
-          throw new Error("Failed to fetch products");
-        }
-
         const data = await res.json();
 
-        setProducts(data.products);
-        setPagination(data.pagination);
-
-        setCache(cacheKey, {
-          products: data.products,
-          pagination: data.pagination,
-        });
+        setProducts(data?.products ?? []);
+        setPagination(data?.pagination ?? null);
       } catch (err) {
         console.error(err);
+        setProducts([]);
       } finally {
         setLoading(false);
       }
@@ -159,32 +94,22 @@ export function ProductProvider({
   }, [page, category]);
 
   // ---------------------------
-  // Fetch Categories
+  // CATEGORIES (FIXED SAFE PARSING)
   // ---------------------------
-
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const cached = getCache<Category[]>("categories");
-
-        if (cached) {
-          setCategories(cached);
-          return;
-        }
-
         const res = await fetch("/api/category");
-
-        if (!res.ok) {
-          throw new Error("Failed to fetch categories");
-        }
-
         const data = await res.json();
 
-        setCategories(data);
+        const safeCategories = Array.isArray(data?.data)
+          ? data.data
+          : [];
 
-        setCache("categories", data);
+        setCategories(safeCategories);
       } catch (err) {
         console.error(err);
+        setCategories([]);
       }
     };
 
@@ -213,9 +138,7 @@ export function useProducts() {
   const context = useContext(ProductContext);
 
   if (!context) {
-    throw new Error(
-      "useProducts must be used inside ProductProvider"
-    );
+    throw new Error("useProducts must be used inside ProductProvider");
   }
 
   return context;

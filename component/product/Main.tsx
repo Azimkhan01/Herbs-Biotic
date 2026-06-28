@@ -2,7 +2,6 @@
 
 import { manrope } from "@/font/font";
 import { useProducts } from "@/context/ProductContext";
-import { useRouter } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 import { RefObject } from "react";
 import { useLenis } from "../layout/lenis";
@@ -13,8 +12,9 @@ interface MainProps {
 export default function Main({ productRef }: MainProps) {
   const { categories, loading, setCategory, setPage } = useProducts();
   const lenis = useLenis();
-
-  const router = useRouter();
+  console.log(categories);
+  
+  // const router = useRouter();
 
   const handleCategory = (categoryId: string) => {
     setCategory(categoryId);
@@ -45,7 +45,7 @@ export default function Main({ productRef }: MainProps) {
           </div>
         ) : (
           <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {categories.map((category) => (
+            {categories?.map((category) => (
               <button
                 key={category.category_id}
                 onClick={() => handleCategory(category.category_id)}

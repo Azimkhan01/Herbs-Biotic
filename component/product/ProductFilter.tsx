@@ -103,7 +103,7 @@ export default function ProductFilter() {
             All Products
           </button>
 
-          {categories.map((item) => (
+          {categories?.map((item) => (
             <button
               key={item.category_id}
               onClick={() => handleCategory(item.category_id)}

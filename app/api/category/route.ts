@@ -1,7 +1,33 @@
+import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
-import {prisma} from "@/lib/prisma"
-export async function GET()
-{
-    const data = await prisma.categories.findMany()
-    return NextResponse.json(data)
+
+export async function GET() {
+  
+  try {
+    
+    const categories = await prisma.categories.findMany({
+      select: {
+        category_id: true,
+        category_name: true,
+      },
+      orderBy: {
+        category_name: "asc",
+      },
+    });
+
+    return NextResponse.json({
+      success: true,
+      data: categories,
+    });
+  } catch (error) {
+    console.error(error);
+
+    return NextResponse.json(
+      {
+        success: false,
+        data: [],
+      },
+      { status: 500 }
+    );
+  }
 }
