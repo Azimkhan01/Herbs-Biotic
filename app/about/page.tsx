@@ -2,7 +2,83 @@ import Hero from "@/component/common/Hero";
 import CurveDivider from "@/component/common/Wave";
 import { manrope } from "@/font/font";
 import Link from "next/link";
+import type { Metadata } from "next";
 
+// =======================================================
+// 📌 ABOUT PAGE SEO
+// Customize these values for your business.
+// =======================================================
+
+export const metadata: Metadata = {
+  // Browser title & Google title
+  title: "About Us | Herbs Biotics",
+
+  // Meta Description (150–160 characters recommended)
+  description:
+    "Learn about Herbs Biotics, a trusted Indian manufacturer and supplier of herbal extracts, nutraceutical ingredients, vitamins, spray-dried powders, and natural healthcare solutions.",
+
+  // Keywords
+  keywords: [
+    "About Herbs Biotics",
+    "Herbal Ingredients",
+    "Ayurvedic Ingredients",
+    "Nutraceutical Manufacturer",
+    "Herbal Extract Manufacturer",
+    "Spray Dried Powder",
+    "Vitamin Supplier",
+    "ISO Certified Company",
+    "GMP Certified",
+    "Indian Herbal Company",
+  ],
+
+  // Canonical URL
+  alternates: {
+    canonical: "/about",
+  },
+
+  // Search Engine Rules
+  robots: {
+    index: true,
+    follow: true,
+  },
+
+  // Open Graph (Facebook, WhatsApp, LinkedIn)
+  openGraph: {
+    title: "About Herbs Biotics",
+
+    description:
+      "Discover Herbs Biotics, an ISO & GMP certified manufacturer specializing in herbal extracts, nutraceutical ingredients, vitamins, and natural wellness products.",
+
+    url: "https://yourdomain.com/about", // Replace
+
+    siteName: "Herbs Biotics",
+
+    locale: "en_US",
+
+    type: "website",
+
+    images: [
+      {
+        url: "/og-about.jpg", // Add to public/
+        width: 1200,
+        height: 630,
+        alt: "About Herbs Biotics",
+      },
+    ],
+  },
+
+  // Twitter Card
+  twitter: {
+    card: "summary_large_image",
+
+    title: "About Herbs Biotics",
+
+    description:
+      "Learn more about Herbs Biotics and our commitment to quality herbal and nutraceutical ingredients.",
+
+    images: ["/og-about.jpg"],
+  },
+};
 function page() {
   return (
     <section className="min-h-screen pt-22">
@@ -62,7 +138,12 @@ function page() {
           In <span className="font-black">Herbs Biotics</span> we are everything
           next to in you and the pet your!
         </p>
-        <Link className={`${manrope.className} text-teal-900 bg-[#e1e53f] p-4 rounded-full font-semibold`} href={'/product'}>See Our Product</Link>
+        <Link
+          className={`${manrope.className} text-teal-900 bg-[#e1e53f] p-4 rounded-full font-semibold`}
+          href={"/product"}
+        >
+          See Our Product
+        </Link>
       </div>
     </section>
   );

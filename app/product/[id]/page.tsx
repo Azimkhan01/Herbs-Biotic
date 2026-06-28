@@ -4,13 +4,100 @@ import { archivo_black, manrope } from "@/font/font";
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import { ReactNode } from "react";
+import type { Metadata } from "next";
 
 interface PageProps {
   params: Promise<{
     id: string;
   }>;
 }
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { id } = await params;
 
+  const product = await prisma.products.findUnique({
+    where: { id },
+    include: { product_images: true, categories: true },
+  });
+
+  if (!product) {
+    return {
+      title: "Product Not Found | Herbs Biotics",
+    };
+  }
+
+  const title =
+    product.Botanical_Name ?? product.Extract_Name;
+
+  const description =
+    product.Primary_Benefit ??
+    `${product.Extract_Name} herbal extract by Herbs Biotics. Premium botanical ingredient for nutraceutical and pharmaceutical industries.`;
+
+  const image =
+    product.product_images[0]?.url ?? "/og-product.jpg";
+
+  const keywords = [
+    product.Botanical_Name,
+    product.Extract_Name,
+    product.Active_Compound,
+    product.Part_Used,
+    product.Package_Size,
+    product.categories?.category_name,
+    "Herbal Extract",
+    "Ayurvedic Ingredients",
+    "Natural Health",
+    "Herbs Biotics",
+  ].filter((v): v is string => Boolean(v));
+
+  return {
+    title: `${title} | Herbs Biotics`,
+
+    description,
+
+    keywords,
+
+    alternates: {
+      canonical: `/product/${product.id}`,
+    },
+
+    robots: {
+      index: true,
+      follow: true,
+    },
+
+    openGraph: {
+      title,
+
+      description,
+
+      url: `https://yourdomain.com/product/${product.id}`,
+
+      siteName: "Herbs Biotics",
+
+      type: "website",
+
+      images: [
+        {
+          url: image,
+          width: 1200,
+          height: 630,
+          alt: title ?? "Herbal Product",
+        },
+      ],
+    },
+
+    twitter: {
+      card: "summary_large_image",
+
+      title,
+
+      description,
+
+      images: [image],
+    },
+  };
+}
 function Badge({ children }: { children: ReactNode }) {
   return (
     <span

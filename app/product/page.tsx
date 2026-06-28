@@ -1,30 +1,63 @@
-"use client";
+import type { Metadata } from "next";
+import ProductPage from "./ProductPage";
 
-import { useRef } from "react";
+export const metadata: Metadata = {
+  title: "Products | Herbs Biotics",
 
-import CurveDivider from "@/component/common/Wave";
-import Main from "@/component/product/Main";
-import ProductFilter from "@/component/product/ProductFilter";
-import ProductSection from "@/component/product/ProductSection";
-import { ProductProvider } from "@/context/ProductContext";
-import Hero from "@/component/common/Hero";
+  description:
+    "Browse Herbs Biotics' collection of premium herbal, Ayurvedic, and natural wellness products designed to support a healthier lifestyle.",
+
+  keywords: [
+    "Herbs Biotics",
+    "Herbal Products",
+    "Ayurvedic Medicine",
+    "Natural Supplements",
+    "Organic Wellness",
+    "Health Products",
+  ],
+
+  alternates: {
+    canonical: "/product",
+  },
+
+  openGraph: {
+    title: "Products | Herbs Biotics",
+    description:
+      "Discover premium herbal and Ayurvedic healthcare products.",
+
+    url: "https://yourdomain.com/product",
+
+    siteName: "Herbs Biotics",
+
+    type: "website",
+
+    images: [
+      {
+        url: "/og-products.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Herbs Biotics Products",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+
+    title: "Products | Herbs Biotics",
+
+    description:
+      "Premium herbal and Ayurvedic products from Herbs Biotics.",
+
+    images: ["/og-products.jpg"],
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
 
 export default function Page() {
-  const productRef = useRef<HTMLElement>(null);
-
-  return (
-    <section className="mt-22">
-      <Hero title="Products" current={{name:"Product",link:"/product"}} />
-      <CurveDivider color="#FFFFFF" className="bg-[#F3F4F6]" />
-
-      <ProductProvider>
-        <Main productRef={productRef} />
-
-        <section className="relative">
-          <ProductFilter />
-          <ProductSection productRef={productRef} />
-        </section>
-      </ProductProvider>
-    </section>
-  );
+  return <ProductPage />;
 }
