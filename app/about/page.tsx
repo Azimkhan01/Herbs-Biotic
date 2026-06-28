@@ -2,7 +2,6 @@ import Hero from "@/component/common/Hero";
 import CurveDivider from "@/component/common/Wave";
 import { manrope } from "@/font/font";
 import Link from "next/link";
-import React from "react";
 
 function page() {
   return (

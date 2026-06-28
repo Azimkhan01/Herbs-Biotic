@@ -4,7 +4,14 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { FaFacebookF, FaInstagram } from "react-icons/fa";
 import { manrope } from "@/font/font";
-import Booklet from "./header_component/Booklet";
+import dynamic from "next/dynamic";
+
+const Booklet = dynamic(
+  () => import("./header_component/Booklet"),
+  {
+    ssr: false,
+  }
+);
 
 interface Category {
   category_id: string;
