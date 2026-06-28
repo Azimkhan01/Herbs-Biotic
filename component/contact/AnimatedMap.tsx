@@ -12,7 +12,7 @@ interface AnimatedMapProps {
 }
 
 export default function AnimatedMap({
-  location = "Mumbai Maharashtra India",
+  location = "Plot No. 90, Block B, Sector 67, Noida, Uttar Pradesh 201301, India",
 }: AnimatedMapProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const mapWrapperRef = useRef<HTMLDivElement>(null);
@@ -39,17 +39,14 @@ export default function AnimatedMap({
             end: "+=1200",
             scrub: true,
           },
-        }
+        },
       );
     },
-    { scope: sectionRef }
+    { scope: sectionRef },
   );
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative h-[220vh] "
-    >
+    <section ref={sectionRef} className="relative h-[220vh] ">
       {/* Sticky Area */}
       <div className="sticky top-0 flex h-screen items-center justify-center overflow-hidden">
         <div
@@ -65,8 +62,8 @@ export default function AnimatedMap({
           <iframe
             title="Google Map"
             src={`https://maps.google.com/maps?q=${encodeURIComponent(
-              location
-            )}&t=&z=15&ie=UTF8&iwloc=&output=embed`}
+              location,
+            )}&t=&z=17&ie=UTF8&iwloc=&output=embed`}
             className="h-full w-full border-0"
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"

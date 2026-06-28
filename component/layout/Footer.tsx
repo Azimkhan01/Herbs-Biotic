@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { FaFacebookF, FaInstagram } from "react-icons/fa";
 import { manrope } from "@/font/font";
+import Booklet from "./header_component/Booklet";
 
 interface Category {
   category_id: string;
@@ -247,6 +248,7 @@ export default function Footer() {
           </div>
         </div>
       </footer>
+      <Booklet/>
     </section>
   );
 }
