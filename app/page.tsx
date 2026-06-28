@@ -9,6 +9,7 @@ export default function Home() {
   return (
     <>
     <Hero/>
+    <section className="h-screen" />
     <Recommendation/>    
     <QnA/>
     <Page2/>
