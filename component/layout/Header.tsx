@@ -14,13 +14,14 @@ import "./css/header.css";
 
 import MobileSideNavbar from "./header_component/MobileSideNavbar";
 import { manrope } from "@/font/font";
+import SearchBox from "./header_component/SearchBox";
 
 export default function Header() {
   const pathname = usePathname();
 
   const [isNavbar, setIsNavbar] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-
+  const [searchOpen, setSearchOpen] = useState(false);
   // -------------------------------
   // Refs
   // -------------------------------
@@ -251,9 +252,9 @@ export default function Header() {
           {/* ---------------- Right Side ---------------- */}
 
           <div className="flex w-2/7 items-center justify-end gap-6">
-            <Link href="/search">
+            <button title="t" onClick={() => setSearchOpen(true)}>
               <CiSearch className="text-2xl" />
-            </Link>
+            </button>
 
             <Link
               href="/product"
@@ -296,8 +297,8 @@ export default function Header() {
             </Link>
           </div>
         </nav>
+        <SearchBox open={searchOpen} onClose={() => setSearchOpen(false)} />
       </header>
-
       <MobileSideNavbar isNavbar={isNavbar} setIsNavbar={setIsNavbar} />
     </>
   );

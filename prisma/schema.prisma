@@ -40,6 +40,9 @@ model products {
   product_images           product_images[]
   categories               categories            @relation(fields: [Category], references: [category_id])
   recommended_products     recommended_products?
+  @@index([Extract_Name])
+  @@index([Botanical_Name])
+  @@index([Active_Compound])
 }
 
 model recommended_products {
