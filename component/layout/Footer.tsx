@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { FaFacebookF, FaInstagram } from "react-icons/fa";
+import { manrope } from "@/font/font";
 
 interface Category {
   category_id: string;
@@ -52,12 +53,13 @@ export default function Footer() {
 
   return (
     <section>
-        
       {/* ================= HERO SECTION ================= */}
 
       {/* ================= HERO SECTION ================= */}
 
-      <section className="relative h-[450px] md:h-[600px] overflow-hidden">
+      <section
+        className={`relative h-[450px] md:h-[600px] overflow-hidden ${manrope.className}`}
+      >
         <img
           src="https://images.pexels.com/photos/15625745/pexels-photo-15625745.jpeg"
           alt="Banner"
@@ -100,14 +102,42 @@ export default function Footer() {
               </h3>
 
               <p className="text-white/80 leading-8">
-                123 Your Address Here
+                <span className="font-semibold">Billing Address:</span>
                 <br />
-                City, State
+                D-77 Sector-63 Noida,
+                <br />
+                Gautam Buddha Nagar,
+                <br />
+                Uttar Pradesh 201301
               </p>
 
-              <p className="mt-5 text-white/80">Phone: +91 9876543210</p>
+              <p className="text-white/80 leading-8">
+                <span className="font-semibold">Shipping Address:</span>
+                <br />
+                Plot No: 90, Block B,
+                <br />
+                Sector 67, Noida,
+                <br />
+                Uttar Pradesh 201301
+              </p>
 
-              <p className="text-white/80">Email: info@example.com</p>
+              <p className="mt-5 text-white/80">
+                Phone:{" "}
+                <a href="tel:+918860777110" className="hover:underline">
+                  +91 8860777110
+                </a>{" "}
+                /{" "}
+                <a href="tel:+918860777130" className="hover:underline">
+                  8860777130
+                </a>
+              </p>
+
+              <p className="text-white/80">
+                Email:{" "}
+                <a href="mailto:info.herbsbiotic@gmail.com" className="hover:underline">
+                  info.herbsbiotic@gmail.com
+                </a>
+              </p>
 
               <div className="flex justify-center lg:justify-start gap-4 mt-8">
                 <Link

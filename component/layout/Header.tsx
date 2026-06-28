@@ -190,10 +190,10 @@ export default function Header() {
             </Link>
 
             <Link
-              href="/certification"
+              href="/about"
               className="animated-line text-sm uppercase tracking-wider"
             >
-              Certification
+              About
             </Link>
           </div>
 

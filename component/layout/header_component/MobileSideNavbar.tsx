@@ -81,11 +81,11 @@ function MobileSideNavbar({ isNavbar, setIsNavbar }: Props) {
           {/* Certification */}
           <div className="border-b border-black/10 py-3">
             <Link
-              href="/certification"
+              href="/about"
               className="block text-lg font-medium uppercase"
               onClick={() => setIsNavbar(false)}
             >
-              Certification
+              About
             </Link>
           </div>
         </div>
