@@ -59,7 +59,7 @@ export function CategoryProvider({
 
         // Fetch if cache missing or expired
         const res = await fetch("/api/category");
-        const data: Category[] = await res.json();
+        const data: Category[] = await res.json().data;
 
         setCategories(data);
 
