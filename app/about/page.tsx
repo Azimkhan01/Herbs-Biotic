@@ -79,74 +79,94 @@ export const metadata: Metadata = {
     images: ["/og-about.jpg"],
   },
 };
-function page() {
+
+function Page() {
   return (
-    <section className="min-h-screen pt-22">
-      <Hero title="About US" current={{ name: "About", link: "/about" }}>
-        <div className="w-full flex justify-center items-center gap-6 flex-col">
-          <p
-            className={`${manrope.className} text-center text-5xl font-extrabold  text-teal-900 uppercase`}
+    <section className="min-h-screen pt-20 bg-gray-100">
+      {/* Hero */}
+      <Hero title="About Us" current={{ name: "About", link: "/about" }}>
+        <div className="flex flex-col items-center justify-center gap-6 px-5 py-12">
+          <h1
+            className={`${manrope.className} text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold uppercase text-teal-900`}
           >
-            Meet Herbs Bitoics
-          </p>
+            Meet Herbs Biotics
+          </h1>
+
           <p
-            className={`text-center text-teal-900 ${manrope.className} font-semibold w-full md:w-5/6 p-4`}
+            className={`${manrope.className} max-w-5xl text-center text-base sm:text-lg md:text-xl font-medium text-teal-900 leading-8`}
           >
             Herbs Biotic is an Indian company delivering high-quality active
             ingredients, including Herbal Extracts, Spray-Dried Powders,
-            Vitamins, and Nutraceutical Ingredients. We serve the Personal Care,
-            Food, Pharmaceutical, and Nutraceutical industries with reliable
-            supply, ready stock, and customized solutions.
+            Vitamins, and Nutraceutical Ingredients. We serve the Personal
+            Care, Food, Pharmaceutical, and Nutraceutical industries with
+            reliable supply, ready stock, and customized solutions.
           </p>
         </div>
       </Hero>
-      <CurveDivider color="#FFFFFF" className="bg-[#F3F4F6]" />
-      <div className="h-screen bg-white">
-        <div>
-          <p
-            className={`${manrope.className} text-center text-6xl font-extrabold  text-teal-900 uppercase`}
+
+      <CurveDivider color="#FFFFFF" className="bg-gray-100" />
+
+      {/* Company Section */}
+      <section className="bg-white py-16 md:py-24">
+        <div className="container mx-auto px-5 md:px-10">
+          <h2
+            className={`${manrope.className} text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold uppercase text-teal-900`}
           >
             Our Company
-          </p>
-        </div>
-        <div className="p-10 md:p-20 w-full flex flex-col md:flex-row justify-between items-center">
-          <div className="w-full md:w-1/2 flex justify-center items-center">
-            <img
-              className={`w-4/6 object-cover rounded-2xl`}
-              src={"/about/location.jpeg"}
-              alt="Office"
-            />
+          </h2>
+
+          <div className="mt-14 flex flex-col-reverse lg:flex-row items-center gap-12">
+            {/* Text */}
+            <div className="w-full lg:w-1/2">
+              <p
+                className={`${manrope.className} text-base sm:text-lg md:text-xl leading-8 md:leading-10 font-semibold text-teal-900 text-center lg:text-left`}
+              >
+                As a trusted Manufacturer, Trader, and Retailer, Herbs Biotic
+                is an ISO 9001:2015, ISO 22000:2018, and GMP Certified company,
+                committed to the highest standards of quality, food safety, and
+                manufacturing excellence. Quality assurance and on-time delivery
+                are the foundation of our business, ensuring reliable products
+                and complete customer satisfaction.
+              </p>
+            </div>
+
+            {/* Image */}
+            <div className="w-full lg:w-1/2 flex justify-center">
+              <div className="relative w-full max-w-lg aspect-[4/3] overflow-hidden rounded-3xl shadow-xl">
+                <Image
+                  src="/about/location.jpeg"
+                  alt="Herbs Biotics Office"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </div>
+            </div>
           </div>
-          <div className="w-1/2">
-            <p
-              className={`text-xl font-semibold text-teal-900 ${manrope.className} leading-10`}
-            >
-              As a trusted Manufacturer, Trader, and Retailer, Herbs Biotic is
-              an ISO 9001:2015, ISO 22000:2018, and GMP Certified company,
-              committed to the highest standards of quality, food safety, and
-              manufacturing excellence. Quality assurance and on-time delivery
-              are the foundation of our business, ensuring reliable products and
-              complete customer satisfaction
-            </p>
-          </div>
         </div>
-      </div>
-      <div className="bg-white flex justify-center items-center flex-col gap-10 py-20">
-        <p
-          className={`${manrope.className} text-teal-900 text-4xl font-semibold `}
-        >
-          In <span className="font-black">Herbs Biotics</span> we are everything
-          next to in you and the pet your!
-        </p>
-        <Link
-          className={`${manrope.className} text-teal-900 bg-[#e1e53f] p-4 rounded-full font-semibold`}
-          href={"/product"}
-        >
-          See Our Product
-        </Link>
-      </div>
+      </section>
+
+      {/* CTA */}
+      <section className="bg-white py-20">
+        <div className="container mx-auto px-5 flex flex-col items-center gap-8">
+          <h3
+            className={`${manrope.className} text-center text-2xl sm:text-3xl md:text-4xl font-semibold text-teal-900 leading-relaxed`}
+          >
+            At <span className="font-black">Herbs Biotics</span>, we create
+            premium-quality ingredients that power healthier products for
+            people and pets.
+          </h3>
+
+          <Link
+            href="/product"
+            className={`${manrope.className} rounded-full bg-[#E1E53F] px-8 py-4 text-base md:text-lg font-bold text-teal-900 transition-all duration-300 hover:scale-105 hover:shadow-lg`}
+          >
+            See Our Products
+          </Link>
+        </div>
+      </section>
     </section>
   );
 }
 
-export default page;
+export default Page;
