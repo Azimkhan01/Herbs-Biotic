@@ -3,7 +3,7 @@ import CurveDivider from "@/component/common/Wave";
 import { manrope } from "@/font/font";
 import Link from "next/link";
 import type { Metadata } from "next";
-
+import Image from "next/image";
 // =======================================================
 // 📌 ABOUT PAGE SEO
 // Customize these values for your business.
