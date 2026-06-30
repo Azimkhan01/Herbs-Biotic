@@ -154,7 +154,7 @@ function Page() {
           >
             At <span className="font-black">Herbs Biotics</span>, we create
             premium-quality ingredients that power healthier products for
-            people and pets.
+            people.
           </h3>
 
           <Link
